@@ -1,0 +1,56 @@
+
+
+services:
+  pay-share-app:
+    container_name: pay-share-app
+    image: payshare:latest
+    restart: always
+    ports:
+      - "8081:8081"
+    env_file:
+      - env/.env-event-catalog
+    networks:
+      - event-catalog-network
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 1024M
+        reservations:
+          cpus: '0.25'
+          memory: 64M
+    depends_on:
+      - pay-share-db
+
+  pay-share-db:
+    container_name: event-catalog-postgres
+    image: postgres:latest
+    restart: always
+    user: postgres
+    env_file:
+      - env/.env-event-catalog-db
+    volumes:
+      - postgres_data_usuario_db:/var/lib/postgresql/data
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    ports:
+      - "5432:5432"
+    networks:
+      - event-catalog-network
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 1024M
+        reservations:
+          cpus: '0.25'
+          memory: 64M
+
+networks:
+  pay-share-network:
+    driver: bridge
+volumes:
+  postgres_data_usuario_db:

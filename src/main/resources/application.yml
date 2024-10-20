@@ -1,0 +1,46 @@
+spring:
+  application:
+    name: @project.name@
+    description: @project.description@
+    version: @project.version@
+
+
+  datasource:
+    url: ${PAY-SHARE_SPRING_DATASOURCE_URL:}
+    username: ${PAY-SHARE_SPRING_DATASOURCE_USERNAME:}
+    password: ${PAY-SHARE_SPRING_DATASOURCE_PASSWORD:}
+    driver-class-name: org.postgresql.Driver
+
+  liquibase:
+    enabled: false
+    change-log: classpath:/db/changelog/db.changelog-master.xml
+
+  jpa:
+    show-sql: false
+    hibernate:
+      ddl-auto: create-drop
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    database: postgresql
+
+  profiles:
+    active: ${PROFILE_ENVIRONMENT:dev}
+    include: app, aws
+
+api:
+  security:
+    token:
+      secret: ${JWT_SECRET:alokshakiragrace}
+
+logging:
+  pattern:
+    console: "%d{ABSOLUTE_MICROS} [%-5level] [%t] %c{1} - %msg%n"
+  level:
+    br.com.wells: info
+
+server:
+  error:
+    include-stacktrace: never # desabilitar stacktrace no json que e retornado em caso de erro
+  port: ${PORT:8080}
+  servlet:
+    context-path: /api/v1/
+
