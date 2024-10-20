@@ -1,6 +1,1 @@
 aws:
-  accessKey: ${AWS_ACCESS_KEY:AKIAW3MEBEW2G6Y7SMLA}
-  secretKey: ${AWS_SECRET_KEY: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}
-  region: ${AWS_REGION:us-east-1}
-  bucket:
-    name: ${AWS_BUCKET:event-bucket}
