@@ -1,25 +1,23 @@
 package br.com.vinrei.event.service;
 
-import br.com.vinrei.event.domain.party.Event;
-import br.com.vinrei.event.domain.party.EventRequest;
-import org.springframework.stereotype.Service;
+import br.com.vinrei.event.domain.event.Event;
+import br.com.vinrei.event.domain.event.EventRequest;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.text.ParseException;
 import java.util.List;
 import java.util.UUID;
 
-@Service
-public interface EventService{
+public interface EventService {
 
-	Event save(EventRequest request, MultipartFile imageFile) throws ParseException;
-	
-	List<Event> findAllParties();
+    Event save(EventRequest request, MultipartFile imageFile) throws ParseException;
 
-	Event findEventById(UUID id);
+    List<Event> findAllParties();
 
-	void deleteEvent(UUID id);
+    Event findEventById(UUID id);
 
-	Event editEvent(UUID id, EventRequest eventRequest) throws ParseException;
+    void deleteEvent(UUID id);
+
+    Event editEvent(UUID id, EventRequest eventRequest) throws ParseException;
 }
  

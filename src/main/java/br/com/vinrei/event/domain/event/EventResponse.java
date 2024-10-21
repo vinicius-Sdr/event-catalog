@@ -1,4 +1,4 @@
-package br.com.vinrei.event.domain.party;
+package br.com.vinrei.event.domain.event;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

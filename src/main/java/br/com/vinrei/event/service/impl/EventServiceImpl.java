@@ -1,11 +1,15 @@
 package br.com.vinrei.event.service.impl;
 
 
-import br.com.vinrei.event.domain.party.Event;
-import br.com.vinrei.event.domain.party.EventRequest;
-import br.com.vinrei.event.domain.party.exception.EventNotFoundException;
+import br.com.vinrei.event.domain.address.Address;
+import br.com.vinrei.event.domain.cep.CepResponse;
+import br.com.vinrei.event.domain.event.Event;
+import br.com.vinrei.event.domain.event.EventRequest;
+import br.com.vinrei.event.domain.event.exception.EventNotFoundException;
 import br.com.vinrei.event.repository.EventRepository;
+import br.com.vinrei.event.service.AddressService;
 import br.com.vinrei.event.service.EventService;
+import br.com.vinrei.event.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -22,13 +26,20 @@ import java.util.UUID;
 @Service
 public class EventServiceImpl implements EventService {
 
-    @Value("${aws.bucket.name}")
+    @Value("${AWS_BUCKET}")
     private String bucketName;
 
     @Autowired
     private S3Client s3Client;
 
-    private final EventRepository eventRepository;
+    @Autowired
+    private EventRepository eventRepository;
+
+    @Autowired
+    AddressService addressService;
+
+    @Autowired
+    LogResponseServiceImpl logResponseService;
 
 
     public EventServiceImpl(EventRepository eventRepository) {
@@ -43,8 +54,13 @@ public class EventServiceImpl implements EventService {
              imgUrl = this.uploadImg(imageFile);
         }
 
+        CepResponse response = logResponseService.consultaCep(request.cep());
+
+        Address address = addressService.save(response);
+
         Event event = new Event(request);
         event.setImgUrl(imgUrl);
+        event.setAddress(address);
 
         return eventRepository.save(event);
     }
@@ -82,8 +98,7 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public Event findEventById(UUID id) {
-        Event event = this.eventRepository.findById(id).orElseThrow(EventNotFoundException::new);
-        return event;
+        return this.eventRepository.findById(id).orElseThrow(EventNotFoundException::new);
     }
 
 
@@ -100,12 +115,7 @@ public class EventServiceImpl implements EventService {
         Event event = this.eventRepository.findById(id).orElseThrow(EventNotFoundException::new);
 
         if (!eventRequest.eventName().isEmpty()) event.setEventName(eventRequest.eventName());
-//        if (eventRequest.guests() != 0) event.setMaximumGuests(eventRequest.guests());
-//        if (!eventRequest.finishDate().isEmpty())
-//            event.setFinishDate(DateUtils.formatStringToDate(eventRequest.finishDate()));
-//        if (!eventRequest.startDate().isEmpty())
-//            event.setStartDate(DateUtils.formatStringToDate(eventRequest.startDate()));
-
+        if (!eventRequest.eventDate().isEmpty()) event.setEventDate(DateUtils.formatStringToDate(eventRequest.eventDate()));
         this.eventRepository.save(event);
 
 

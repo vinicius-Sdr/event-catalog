@@ -1,9 +1,8 @@
 package br.com.vinrei.event.service;
 
-import org.springframework.stereotype.Service;
+import br.com.vinrei.event.domain.cep.CepResponse;
 
-@Service
-public interface LogResponseSevice{
+public interface LogResponseSevice {
 
-     String consultaCep(String cep);
+    CepResponse consultaCep(String cep);
 }

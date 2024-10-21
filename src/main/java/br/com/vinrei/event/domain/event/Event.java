@@ -1,6 +1,7 @@
-package br.com.vinrei.event.domain.party;
+package br.com.vinrei.event.domain.event;
 
 
+import br.com.vinrei.event.domain.address.Address;
 import br.com.vinrei.event.utils.DateUtils;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -31,16 +32,21 @@ public class Event {
     @Column(name = "CREATED_AT", nullable = false)
     private Date createdAt;
 
-    @Column(name = "EVENT_FINISH_DATE", nullable = false)
+    @Column(name = "EVENT_DATE", nullable = false)
     private Date eventDate;
 
     @Column(name = "img url")
     private String imgUrl;
 
+    @ManyToOne
+    @JoinColumn(name = "address_id")
+    private Address address;
+
+
     public Event(EventRequest request) throws ParseException {
         this.createdAt = DateUtils.formatDate(new Date());
         this.eventName = request.eventName();
-        this.eventDate = DateUtils.formatStringToDate(request.finishDate());
+        this.eventDate = DateUtils.formatStringToDate(request.eventDate());
     }
 
 

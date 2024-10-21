@@ -1,8 +1,8 @@
 package br.com.vinrei.event.controller;
 
 
-import br.com.vinrei.event.domain.party.Event;
-import br.com.vinrei.event.domain.party.EventRequest;
+import br.com.vinrei.event.domain.event.Event;
+import br.com.vinrei.event.domain.event.EventRequest;
 import br.com.vinrei.event.service.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,13 +22,12 @@ public class EventController {
 	@Autowired
 	private EventService eventService;
 	
-	@PostMapping(consumes = "multipart/form-data")
-	public ResponseEntity<Event> createEvent(@RequestParam int guests,
-											 @RequestParam String eventName,
-											 @RequestParam String startDate,
-											 @RequestParam String endDate,
+	@PostMapping
+	public ResponseEntity<Event> createEvent(@RequestParam String eventName,
+											 @RequestParam String eventDate,
+											 @RequestParam String cep,
 											 @RequestPart("image") MultipartFile imageFile) throws ParseException {
-		EventRequest event = new EventRequest(guests, eventName, startDate, endDate, imageFile);
+		EventRequest event = new EventRequest(eventName, eventDate, cep, imageFile);
 
 		return new ResponseEntity<>(eventService.save(event, imageFile), HttpStatus.CREATED);
 	}
@@ -42,6 +41,7 @@ public class EventController {
 	public ResponseEntity<Event> getEventById(@PathVariable UUID id) {
 		 return ResponseEntity.ok().body(eventService.findEventById(id));
 	}
+
 
 
 	@PutMapping("/{id}")

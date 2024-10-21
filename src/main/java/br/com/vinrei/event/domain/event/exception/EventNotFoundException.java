@@ -1,4 +1,4 @@
-package br.com.vinrei.event.domain.party.exception;
+package br.com.vinrei.event.domain.event.exception;
 
 public class EventNotFoundException extends RuntimeException{
 
