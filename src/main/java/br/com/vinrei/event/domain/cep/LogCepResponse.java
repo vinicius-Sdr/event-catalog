@@ -29,6 +29,9 @@ public class LogCepResponse {
     private LocalDateTime timestamp;
 
     public LogCepResponse(String cep, String string, LocalDateTime now) {
+        this.cep = cep;
+        this.data = string;
+        this.timestamp = now;
     }
 
 

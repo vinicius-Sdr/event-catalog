@@ -16,7 +16,7 @@ import java.util.UUID;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "PARTY")
+@Table(name = "EVENT")
 @Entity
 @Data
 public class Event {

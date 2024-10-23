@@ -18,5 +18,17 @@ public class CepResponse {
     private String estado;
     private String complemento;
 
-
+    @Override
+    public String toString() {
+        return "CepResponse{" +
+                "cep='" + cep + '\'' +
+                ", logradouro='" + logradouro + '\'' +
+                ", localidade='" + localidade + '\'' +
+                ", uf='" + uf + '\'' +
+                ", cidade='" + cidade + '\'' +
+                ", bairro='" + bairro + '\'' +
+                ", estado='" + estado + '\'' +
+                ", complemento='" + complemento + '\'' +
+                '}';
+    }
 }

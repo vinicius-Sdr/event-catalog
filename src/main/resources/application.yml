@@ -6,9 +6,9 @@ spring:
 
 
   datasource:
-    url: ${PAY-SHARE_SPRING_DATASOURCE_URL:}
-    username: ${PAY-SHARE_SPRING_DATASOURCE_USERNAME:}
-    password: ${PAY-SHARE_SPRING_DATASOURCE_PASSWORD:}
+    url: ${EVENT_SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/event}
+    username: ${EVENT_SPRING_DATASOURCE_USERNAME:postgres}
+    password: ${EVENT_SPRING_DATASOURCE_PASSWORD:postgres}
     driver-class-name: org.postgresql.Driver
 
   liquibase:
