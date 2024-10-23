@@ -1,0 +1,13 @@
+{
+  "request": {
+    "method": "GET",
+    "urlPathPattern": "/cep/([0-9]{5}-[0-9]{3})"
+  },
+  "response": {
+    "status": 200,
+    "body": "{\"cep\": \"12345-678\", \"logradouro\": \"Rua Exemplo\", \"bairro\": \"Bairro Exemplo\", \"cidade\": \"Cidade Exemplo\", \"estado\": \"EX\"}",
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "request": {
+    "method": "GET",
+    "urlPathPattern": "/api/v1/cep/04829290"
+  },
+  "response": {
+    "status": 200,
+    "jsonBody": {
+      "cep": "04829-290",
+      "logradouro":"Rua Alfonso de Albuquerque",
+      "localidade":"São Paulo",
+      "uf":"SP",
+      "cidade":"null",
+      "bairro":"Jardim das Imbuias",
+      "estado":"São Paulo",
+      "complemento":""
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  }
+}

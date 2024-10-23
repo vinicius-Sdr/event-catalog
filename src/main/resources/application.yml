@@ -31,6 +31,11 @@ api:
     token:
       secret: ${JWT_SECRET:alokshakiragrace}
 
+external:
+  url:
+    api: http://localhost:8383/api/v1/cep
+
+
 logging:
   pattern:
     console: "%d{ABSOLUTE_MICROS} [%-5level] [%t] %c{1} - %msg%n"
