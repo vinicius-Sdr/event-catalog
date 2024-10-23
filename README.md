@@ -1,3 +1,3 @@
 # event-catalog
+![image](https://github.com/user-attachments/assets/b4458569-41ed-4cdc-9ddc-937d904cb992)
 
-![image](https://github.com/user-attachments/assets/a1c890d9-7be1-43da-9a51-e102e1571be7)
